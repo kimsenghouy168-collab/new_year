@@ -29,7 +29,7 @@
             top: 0;
             left: 0;
             z-index: -3;
-            background: linear-gradient(-45deg, #ffdde1, #ff9a9e, #fad0c4, #ffd1ff);
+            background: linear-gradient(-45deg, #ffdde1, #ff9a9e, #fad0c4, #ffd1ff, #ffeaa7);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
         }
@@ -53,9 +53,9 @@
 
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.35);
             border-radius: 100px;
-            opacity: 0.6;
+            opacity: 0.7;
             animation: float linear infinite;
         }
 
@@ -63,7 +63,7 @@
         .cloud::after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.35);
             border-radius: 100px;
         }
 
@@ -170,8 +170,8 @@
         }
 
         @keyframes gentleBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
         }
 
         @keyframes floatHeart {
@@ -179,10 +179,20 @@
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
         .heart-float {
             position: fixed;
-            font-size: 25px;
-            opacity: 0.4;
+            font-size: 28px;
+            opacity: 0.45;
             animation: floatHeart 15s linear infinite;
             pointer-events: none;
             z-index: 1;
@@ -190,10 +200,10 @@
 
         /* Capybara ONE AT A TIME */
         @keyframes capyShowHide {
-            0% { opacity: 0; transform: translate(150%, 150%) scale(0.7); }
-            5% { opacity: 1; transform: translate(0, 0) scale(1); }
-            22% { opacity: 1; transform: translate(0, 0) scale(1); }
-            27% { opacity: 0; transform: translate(-150%, -150%) scale(0.7); }
+            0% { opacity: 0; transform: translate(150%, 150%) scale(0.7) rotate(10deg); }
+            5% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+            22% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+            27% { opacity: 0; transform: translate(-150%, -150%) scale(0.7) rotate(-10deg); }
             100% { opacity: 0; }
         }
 
@@ -202,7 +212,7 @@
             width: 140px;
             height: auto;
             z-index: 20;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 6px 15px rgba(0,0,0,0.2));
             opacity: 0;
             animation: capyShowHide 20s ease-in-out infinite;
         }
@@ -244,31 +254,40 @@
         }
 
         .title {
-            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-size: clamp(2.2rem, 8vw, 5rem);
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 4px 20px rgba(255, 107, 129, 0.4);
+            background: linear-gradient(135deg, #ffffff 0%, #ffe5e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 20px rgba(255, 107, 129, 0.5));
             margin: 0 0 0.5rem 0;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             animation: fadeInUp 1s ease-out;
         }
 
         .year {
-            font-size: clamp(2.8rem, 10vw, 5.5rem);
+            font-size: clamp(3.2rem, 12vw, 6.5rem);
             font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 4px 25px rgba(255, 71, 87, 0.5);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF69B4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 5px 30px rgba(255, 215, 0, 0.6));
             margin: 0 0 0.8rem 0;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             animation: fadeInUp 1s ease-out 0.3s backwards, gentleBounce 3s ease-in-out 2s infinite;
         }
 
         .subtitle {
-            font-size: clamp(1.6rem, 6vw, 3rem);
+            font-size: clamp(1.8rem, 6.5vw, 3.5rem);
             font-weight: 700;
-            color: #FF4757;
-            text-shadow: 0 3px 15px rgba(255, 255, 255, 0.6);
-            margin: 0 0 1rem 0;
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 3px 15px rgba(255, 20, 147, 0.4));
+            margin: 0 0 1.2rem 0;
             letter-spacing: 1px;
             animation: fadeInUp 1s ease-out 0.6s backwards;
         }
@@ -276,55 +295,92 @@
         .badge {
             display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
             color: white;
-            padding: 0.7rem 1.5rem;
+            padding: 0.85rem 2rem;
             border-radius: 50px;
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-            font-weight: 600;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
-            margin: 0 0 1.5rem 0;
-            letter-spacing: 0.3px;
-            animation: fadeInUp 1s ease-out 0.9s backwards;
+            font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+            font-weight: 700;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+            margin: 0 0 1.8rem 0;
+            letter-spacing: 0.5px;
+            animation: fadeInUp 1s ease-out 0.9s backwards, pulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
         }
 
         .message-text {
-            font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #ffffff;
-            line-height: 1.7;
+            line-height: 1.8;
             font-weight: 600;
-            max-width: 750px;
-            padding: 0 1rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            max-width: 800px;
+            padding: 0 1.2rem;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.2);
             animation: fadeInUp 1s ease-out 1.2s backwards;
         }
 
         .love-btn {
-            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 50%, #FFB6C1 100%);
+            background-size: 200% 200%;
             color: white;
             border: none;
-            padding: 1rem 2.2rem;
-            font-size: clamp(0.95rem, 3vw, 1.15rem);
-            font-weight: 600;
+            padding: 1.1rem 2.5rem;
+            font-size: clamp(1rem, 3.2vw, 1.25rem);
+            font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 6px 25px rgba(255, 20, 147, 0.35);
-            transition: all 0.4s ease;
-            margin-top: 1.8rem;
+            box-shadow: 0 8px 35px rgba(255, 20, 147, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 2rem;
             letter-spacing: 0.5px;
             animation: fadeInUp 1s ease-out 1.5s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
         }
 
         .love-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 35px rgba(255, 20, 147, 0.5);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 20, 147, 0.7);
+            animation: pulse 0.8s ease-in-out infinite;
+        }
+
+        .love-btn:hover::before {
+            left: 100%;
+        }
+
+        .love-btn:active {
+            transform: translateY(-3px) scale(1.02);
         }
 
         .modal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
             z-index: 100;
             align-items: center;
             justify-content: center;
@@ -333,50 +389,88 @@
         .modal.show { display: flex; }
 
         .modal-box {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffe5f5 100%);
+            padding: 3rem 2.5rem;
+            border-radius: 30px;
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             margin: 1rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 80px rgba(255, 20, 147, 0.4);
             animation: fadeInUp 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shimmer 4s infinite linear;
         }
 
         .modal-title {
-            font-size: 2.3rem;
-            color: #FF1493;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            position: relative;
         }
 
         .modal-text {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #663399;
             font-weight: 600;
-            line-height: 1.6;
-            margin-bottom: 1.8rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            position: relative;
         }
 
         .modal-btn {
             background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
             color: white;
             border: none;
-            padding: 0.9rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.35);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .modal-btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(255, 20, 147, 0.6);
         }
 
         .typed-cursor {
             color: #ffffff !important;
+            font-weight: bold !important;
+        }
+
+        /* Sparkle effect */
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: sparkle 1.5s ease-in-out infinite;
         }
     </style>
 </head>
@@ -401,6 +495,9 @@
     <!-- Floating hearts -->
     <div id="hearts"></div>
 
+    <!-- Sparkles container -->
+    <div id="sparkles"></div>
+
     <!-- Capybaras -->
     <div id="capy-1" class="capy"></div>
     <div id="capy-2" class="capy"></div>
@@ -412,23 +509,23 @@
         <h1 class="title bubble-font">Happy New Year</h1>
         <div class="year bubble-font">2026</div>
         <h2 class="subtitle bubble-font">My Princess Esther</h2>
-        <div class="badge bubble-font">2 Years & 7 Months Together</div>
+        <div class="badge bubble-font">💕 2 Years & 8 Months Together 💕</div>
 
         <div class="message-text">
             <span id="typed"></span>
         </div>
 
         <button class="love-btn bubble-font" onclick="showModal()">
-            Click if you love me too
+            💖 Click if you love me too 💖
         </button>
     </div>
 
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-box">
-            <div class="modal-title bubble-font">I knew it!</div>
-            <div class="modal-text">You're the best thing that ever happened to me! I love you so much!</div>
-            <button class="modal-btn bubble-font" onclick="closeModal()">Close</button>
+            <div class="modal-title bubble-font">I knew it! 💕</div>
+            <div class="modal-text">You're the best thing that ever happened to me! I love you so much! ✨</div>
+            <button class="modal-btn bubble-font" onclick="closeModal()">💋 Close</button>
         </div>
     </div>
 
@@ -455,13 +552,25 @@
 
         setupCapybaras();
 
+        // Sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 1.5 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 3000);
+        }
+        setInterval(createSparkle, 300);
+
         // Fireworks
         const canvas = document.getElementById('fireworksCanvas');
         const ctx = canvas.getContext('2d');
         let width = 0, height = 0;
         let particles = [];
         let rockets = [];
-        const colors = ['#FF6B81', '#FF4757', '#FF9EAA', '#FFD1DC', '#FFF0F5'];
+        const colors = ['#FF6B81', '#FF4757', '#FF9EAA', '#FFD1DC', '#FFF0F5', '#FFD700'];
         
         function resize() {
             width = window.innerWidth;
@@ -498,6 +607,8 @@
             draw() {
                 ctx.save();
                 ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
                 ctx.fill();
@@ -531,6 +642,8 @@
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.fillStyle = this.color;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = this.color;
                 if (this.size > 2) {
                     drawHeartShape(ctx, this.x, this.y, this.size);
                 } else {
@@ -552,7 +665,7 @@
         }
 
         function spawnHeartExplosion(x, y, color) {
-            const particleCount = 40;
+            const particleCount = 45;
             for (let i = 0; i < particleCount; i++) {
                 const t = (Math.PI * 2 * i) / particleCount;
                 const power = Math.random() * 0.5 + 2.5;
@@ -568,7 +681,7 @@
             requestAnimationFrame(animate);
             ctx.clearRect(0, 0, width, height);
             
-            if (Math.random() < 0.03) {
+            if (Math.random() < 0.04) {
                 rockets.push(new Rocket());
             }
 
@@ -609,18 +722,18 @@
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart-float';
-            heart.innerHTML = ['💕', '💖'][Math.floor(Math.random() * 2)];
+            heart.innerHTML = ['💕', '💖', '💗'][Math.floor(Math.random() * 3)];
             heart.style.left = Math.random() * 100 + '%';
             heart.style.animationDuration = (15 + Math.random() * 5) + 's';
             document.getElementById('hearts').appendChild(heart);
             setTimeout(() => heart.remove(), 20000);
         }
-        setInterval(createHeart, 3500);
+        setInterval(createHeart, 3000);
 
         // Typewriter with heart and kiss emojis only
         setTimeout(() => {
             new Typed('#typed', {
-                strings: ["My dearest Princess Esther, every moment with you feels like a dream I never want to wake up from. For 2 years and 7 months, you've been my heart 💓, my home, and my forever. Thank you for filling my life with endless joy, laughter, and the sweetest memories. Here's to another year of growing together, loving deeper 💞, and making every day as magical as today. Happy New Year and Happy Anniversary! I love you more than words could ever say 💋💋💋"],
+                strings: ["My dearest Princess Esther, every moment with you feels like a dream I never want to wake up from. For 2 years and 8 months, you've been my heart 💓, my home, and my forever. Thank you for filling my life with endless joy, laughter, and the sweetest memories. Here's to another year of growing together, loving deeper 💞, and making every day as magical as today. Happy New Year and Happy Anniversary! I love you more than words could ever say 💋💋💋"],
                 typeSpeed: 30,
                 showCursor: true,
                 cursorChar: '|',
@@ -631,8 +744,8 @@
         // Modal
         function showModal() {
             document.getElementById('modal').classList.add('show');
-            for(let i = 0; i < 40; i++) {
-                setTimeout(() => explodeHeart(), i * 25);
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => explodeHeart(), i * 20);
             }
         }
 
@@ -642,9 +755,9 @@
 
         function explodeHeart() {
             const h = document.createElement('div');
-            h.innerHTML = '❤️';
+            h.innerHTML = ['❤️', '💕', '💖'][Math.floor(Math.random() * 3)];
             h.style.position = 'fixed';
-            h.style.fontSize = '30px';
+            h.style.fontSize = (25 + Math.random() * 15) + 'px';
             h.style.left = '50%';
             h.style.top = '50%';
             h.style.pointerEvents = 'none';
@@ -652,13 +765,13 @@
             document.body.appendChild(h);
 
             const angle = Math.random() * Math.PI * 2;
-            const speed = 6 + Math.random() * 7;
+            const speed = 6 + Math.random() * 8;
             let x = 0, y = 0, opacity = 1;
 
             function move() {
                 x += Math.cos(angle) * speed;
                 y += Math.sin(angle) * speed;
-                opacity -= 0.02;
+                opacity -= 0.018;
                 h.style.transform = `translate(${x}px, ${y}px) rotate(${x * 2}deg)`;
                 h.style.opacity = opacity;
                 if(opacity > 0) requestAnimationFrame(move);
